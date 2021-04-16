@@ -25,9 +25,10 @@ class LoginController extends Controller
     
         $user = User::where('user_name', $request->user_name)->first();
     
-        if (! $user || ! Hash::check($request->password, $user->password)) {
+        if (! $user || ! Hash::check($request->password, $user->password) || ! $user->email_verified_at) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
+                'email_verified_at' => ['Please Verify your Email!']
             ]);
         }
     
@@ -104,10 +105,14 @@ class LoginController extends Controller
         return response()->json($result);
     }
 
-
     public function checkIfUserRegistered( $id ) {
         $user = User::find($id)->first()->pluck('email_verified_at');
         return ( $user ) ? true : false;
+    }
+
+    public function update($id, Request $request) {
+        $user = User::where('id',$id)->update($request->all());
+        return response()->json(array('message' => 'Successfully Updated!'));
     }
 
     //Send Invitation Link with Router/API URL for Signup

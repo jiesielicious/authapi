@@ -28,4 +28,5 @@ Route::middleware('auth:sanctum')->group(function () {
     });
     Route::post('/signup', ['App\Http\Controllers\LoginController', 'signup']);
     Route::post('/verify', ['App\Http\Controllers\LoginController', 'verify']);
+    Route::post('/update/{id}', ['App\Http\Controllers\LoginController', 'update']);
 });
