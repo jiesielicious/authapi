@@ -22,11 +22,11 @@ use Illuminate\Support\Facades\Route;
 Route::post('/sanctum/token', ['App\Http\Controllers\LoginController', 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/sendinvitationlink', ['App\Http\Controllers\LoginController', 'sendinvitationlink']);
+    Route::post('/sendinvitationlink', ['App\Http\Controllers\SendInvitationController', 'sendinvitationlink']);
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-    Route::post('/signup', ['App\Http\Controllers\LoginController', 'signup']);
-    Route::post('/verify', ['App\Http\Controllers\LoginController', 'verify']);
-    Route::post('/update/{id}', ['App\Http\Controllers\LoginController', 'update']);
+    Route::post('/signup', ['App\Http\Controllers\UserController', 'signup']);
+    Route::post('/verify', ['App\Http\Controllers\VerifyController', 'verify']);
+    Route::post('/update/{id}', ['App\Http\Controllers\UserController', 'update']);
 });

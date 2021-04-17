@@ -12,15 +12,17 @@ class Verification extends Mailable
     use Queueable, SerializesModels;
 
     protected $pin;
+    protected $email;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($verificationPin)
+    public function __construct($verificationPin, $emailaddress)
     {
         $this->pin = $verificationPin;
+        $this->email = $emailaddress;
     }
 
     /**
@@ -31,6 +33,6 @@ class Verification extends Mailable
     public function build()
     {
 
-        return $this->text('emails.verification')->with(['pin'=>$this->pin]);
+        return $this->text('emails.verification')->with(['pin'=>$this->pin,'email'=>$this->email]);
     }
 }
