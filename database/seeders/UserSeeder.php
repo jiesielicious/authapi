@@ -23,7 +23,8 @@ class UserSeeder extends Seeder
             'password' => Hash::make('@dm1n123'),
             'verification_pin' => Str::random(6),
             'avatar' => 'avatar.jpg',
-            'user_role' => 'admin'
+            'user_role' => 'admin',
+            'email_verified_at' => now()
         ]);
     }
 }

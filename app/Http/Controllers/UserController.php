@@ -13,8 +13,8 @@ use Illuminate\Validation\ValidationException;
 class UserController extends Controller
 {
     //
-    public function update($id, Request $request) {
-        $user = User::where('id',$id)->update($request->all());
+    public function update(Request $request) {
+        $user = User::where('id',$request->user()->id)->update($request->all());
         return response()->json(array('message' => 'Successfully Updated!'));
     }
 
